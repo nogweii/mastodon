@@ -8,7 +8,7 @@ class Mastodon
     end
 
 # contexts {{{
-    Context_Regex = /@[A-Za-z]+/
+    Context_Regex = /@([A-Za-z]+)/
     # The contexts in the todo file
     def contexts
         @contexts ||= contexts!
@@ -16,14 +16,17 @@ class Mastodon
 
     # Loop through each line and find the project context with it
     def contexts!
+        contexts = []
         @lines.map do |todo|
-            todo[Context_Regex]
+            matchdata = todo.match(Context_Regex)
+            contexts << matchdata[1] if matchdata
         end
+        contexts
     end
 # }}}
 
 # projects {{{
-    Project_Regex = /\+[A-Za-z]+/ # /\+(".*?")/
+    Project_Regex = /\+([A-Za-z]+)/ # /\+(".*?")/
     # The projects in the todo file
     def projects
         @projects ||= projects!
@@ -31,9 +34,12 @@ class Mastodon
 
     # Loop through each line and find the project associated with it
     def projects!
+        projects = []
         @lines.map do |todo|
-            todo[Project_Regex]
+            matchdata = todo.match(Project_Regex)
+            projects << matchdata[1] if matchdata
         end
+        projects
     end
 # }}}
 
