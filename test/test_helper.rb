@@ -21,7 +21,7 @@ SAMPLE_TODOS = [
     "Finish mastadon +coding",
     "Spec 100% +testing",
     "Document 100% +documenting"
-]
+] unless Kernel.const_defined? :SAMPLE_TODOS
 @mast = Mastodon.new(SAMPLE_TODOS)
 
 include Nanotest
