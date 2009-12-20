@@ -47,3 +47,12 @@ CLASS
         end
     end
 end
+
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.libs = ["lib"]
+  t.libs << "test"
+  t.pattern = 'test/test*.rb'
+  t.verbose = true
+  t.warning = true # pass -w to the test suite
+end
