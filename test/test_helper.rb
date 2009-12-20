@@ -18,8 +18,8 @@ end
 require File.dirname(__FILE__) + "/../lib/mastodon.rb"
 
 SAMPLE_TODOS = [
-    "Finish mastadon +coding",
-    "Spec 100% +testing",
+    "Finish mastadon +coding @work",
+    "Spec 100% +testing @people",
     "Document 100% +documenting"
 ] unless Kernel.const_defined? :SAMPLE_TODOS
 @mast = Mastodon.new(SAMPLE_TODOS)
