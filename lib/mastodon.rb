@@ -1,3 +1,5 @@
+require 'mastodon/version'
+
 class Mastodon
 
     # +todo+: An array of strings (each being an individual todo item)
