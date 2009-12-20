@@ -46,4 +46,14 @@ class Mastodon
     def [](id)
         @lines[id]
     end
+
+    # Find all todo's that have the context @+context+
+    def find_context(context)
+        @lines.grep(/@#{context}/)
+    end
+
+    # Find all todo's that have the project @+project+
+    def find_project(project)
+        @lines.grep(/\+#{project}/)
+    end
 end
