@@ -54,5 +54,4 @@ Rake::TestTask.new do |t|
   t.libs << "test"
   t.pattern = 'test/test*.rb'
   t.verbose = true
-  t.warning = true # pass -w to the test suite
 end
