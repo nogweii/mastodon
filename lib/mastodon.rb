@@ -1,3 +1,4 @@
+require 'mastodon/todo'
 require 'mastodon/version'
 
 class Mastodon
