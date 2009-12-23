@@ -1,8 +1,8 @@
 require 'test_helper'
 
 # Test searching and caching.
-assert { @mast.projects.to_a == ["coding", "testing", "documenting"] }
-assert { @mast.contexts.to_a == ["work", "people"] }
+assert { @mast.projects.to_a == ["proj", "proj2", "proj+phone", "proj/foo", "p_r_o_j", "p-r-o-j", "+proj", "@proj"] }
+assert { @mast.contexts.to_a == ["con", "con2", "con@phone", "con/foo", "c_o_n", "c-o-n", "@con", "+con"] }
 
 # Finding existing items
 assert { @mast.find_context("work") == ["Finish mastadon +coding @work"] }
