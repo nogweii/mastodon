@@ -12,3 +12,6 @@ Advanced projects +proj+phone +proj/foo +p_r_o_j +p-r-o-j ++proj
 Mixed symbols: +@proj @+con
 @con Leading with a context
 +proj Leading with a project
+Google+Yahoo+Microsoft == monopoly
+Google + Yahoo + Microsoft == monopoly
+Ready to (ab)use
