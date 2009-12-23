@@ -1,13 +1,14 @@
 require 'set'
+require 'pp'
 
 require 'mastodon/todo'
 require 'mastodon/version'
 
 class Mastodon
     # A context is: An at-sign (@) followed by one or more non-whitespace characters.
-    Context_Regex  = /@([^\s]+)/
+    Context_Regex  = /(?<!\+)\B@(\S+)/
     # A project is: An plus sign (+) followed by one or more non-whitespace characters.
-    Project_Regex  = /\+([^\s]+)/
+    Project_Regex  = /(?<!@)\B\+(\S+)/
     # A priority is: A capital letter (A-Z) surrounded by parentheses, at the beginning of the line.
     Priority_Regex = /^\(([A-Z])\)\s/
 
