@@ -58,7 +58,7 @@ class Mastodon
 
     # How many todos there are.
     def size
-        @lines.size
+        @todos.size
     end
 
     # Get an individual todo. The id and line number are the same.
@@ -68,11 +68,11 @@ class Mastodon
 
     # Find all todo's that have the context @+context+
     def find_context(context)
-        @lines.grep(/@#{context}/)
+        @todos.select { |todo| todo.contexts.include? context }
     end
 
-    # Find all todo's that have the project @+project+
+    # Find all todo's that have the project ++project+
     def find_project(project)
-        @lines.grep(/\+#{project}/)
+        @todos.select { |todo| todo.projects.include? project }
     end
 end
