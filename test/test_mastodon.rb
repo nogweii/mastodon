@@ -5,8 +5,10 @@ assert { @mast.projects.to_a == ["proj", "proj2", "proj+phone", "proj/foo", "p_r
 assert { @mast.contexts.to_a == ["con", "con2", "con@phone", "con/foo", "c_o_n", "c-o-n", "@con", "+con"] }
 
 # Finding existing items
-assert { @mast.find_context("work") == ["Finish mastadon +coding @work"] }
-assert { @mast.find_project("coding") == ["Finish mastadon +coding @work"] }
+assert { @mast.find_context("con2").size  > 0 }
+assert { @mast.find_context("con2").first.text == "Multiple contexts" }
+assert { @mast.find_project("proj2").size > 0 }
+assert { @mast.find_project("proj2").first.text == "Multiple projects" }
 
 # Finding non-existing items
 assert { @mast.find_context("nosuchthing") == [] }
