@@ -1,5 +1,7 @@
 class Mastodon
     class Todo < Struct.new(:text, :contexts, :projects, :priority)
+        include Comparable
+
         def to_s
             "(#{priority}) #{text} @#{contexts.join(' @')} +#{projects.join(' +')}"
         end
