@@ -23,3 +23,7 @@ assert { (@mast[0].to_s.chars.to_a == SAMPLE_TODOS[0].strip.chars.to_a) and (@ma
 assert { @mast.projects.is_a? Set }
 assert { @mast.contexts.is_a? Set }
 assert { @mast[0].is_a? Mastodon::Todo }
+
+# Test if matching at the beginning of a line works
+assert { @mast[13].contexts = ["con"] }
+assert { @mast[14].projects = ["proj"] }
