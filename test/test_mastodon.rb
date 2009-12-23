@@ -1,8 +1,8 @@
 require 'test_helper'
 
 # Test searching and caching.
-assert { @mast.projects == ["coding", "testing", "documenting"] }
-assert { @mast.contexts == ["work", "people"] }
+assert { @mast.projects.to_a == ["coding", "testing", "documenting"] }
+assert { @mast.contexts.to_a == ["work", "people"] }
 
 # Finding existing items
 assert { @mast.find_context("work") == ["Finish mastadon +coding @work"] }
@@ -14,9 +14,10 @@ assert { @mast.find_project("thisprojectdoesntexist") == [] }
 
 # General utility methods.
 assert { @mast.size == SAMPLE_TODOS.size }
-assert { @mast[0] == SAMPLE_TODOS[0] }
+# While I can't guarantee a 1:1 match, nothing should be lost. Just possibly rearranged.
+assert { (@mast[0].to_s.chars.to_a == SAMPLE_TODOS[0].chars.to_a) and (@mast[0].length == SAMPLE_TODOS[0].length) }
 
 # Test if correct classes are returned
-assert { @mast.projects.is_a? Array }
-assert { @mast.contexts.is_a? Array }
+assert { @mast.projects.is_a? Set }
+assert { @mast.contexts.is_a? Set }
 assert { @mast[0].is_a? Mastodon::Todo }
