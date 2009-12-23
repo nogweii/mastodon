@@ -1,3 +1,5 @@
+require 'set'
+
 require 'mastodon/todo'
 require 'mastodon/version'
 
