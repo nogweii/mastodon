@@ -3,7 +3,8 @@ class Mastodon
         include Comparable
 
         def to_s
-            "(#{priority}) #{text} @#{contexts.join(' @')} +#{projects.join(' +')}"
+            pri = priority ? "(#{priority}) " : ""
+            "#{pri}#{text} @#{contexts.join(' @')} +#{projects.join(' +')}"
         end
 
         def inspect

@@ -15,7 +15,7 @@ assert { @mast.find_project("thisprojectdoesntexist") == [] }
 # General utility methods.
 assert { @mast.size == SAMPLE_TODOS.size }
 # While I can't guarantee a 1:1 match, nothing should be lost. Just possibly rearranged.
-assert { (@mast[0].to_s.chars.to_a == SAMPLE_TODOS[0].chars.to_a) and (@mast[0].length == SAMPLE_TODOS[0].length) }
+assert { (@mast[0].to_s.chars.to_a == SAMPLE_TODOS[0].strip.chars.to_a) and (@mast[0].to_s.length == SAMPLE_TODOS[0].strip.length) }
 
 # Test if correct classes are returned
 assert { @mast.projects.is_a? Set }
