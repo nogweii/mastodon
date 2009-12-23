@@ -13,5 +13,10 @@ assert { @mast.find_context("nosuchthing") == [] }
 assert { @mast.find_project("thisprojectdoesntexist") == [] }
 
 # General utility methods.
-assert { @mast.size == 3 }
+assert { @mast.size == SAMPLE_TODOS.size }
 assert { @mast[0] == SAMPLE_TODOS[0] }
+
+# Test if correct classes are returned
+assert { @mast.projects.is_a? Array }
+assert { @mast.contexts.is_a? Array }
+assert { @mast[0].is_a? Mastodon::Todo }
