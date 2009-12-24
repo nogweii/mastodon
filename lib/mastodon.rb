@@ -25,9 +25,9 @@ class Mastodon
         @todos = []
 
         todos.each do |todo|
-            # Looping through the string, find the next context/project. Remove
-            # it from the string. Add it to the correct set. Then clear any
-            # remaining whitespace.
+            # Looping through the string, find the metadata (context, project,
+            # priority). Store it in a temporary variable, then clear it from
+            # the original string. Strip all remaining whitespace at the end.
 
             current_contexts = []
             current_projects = []
@@ -62,17 +62,18 @@ class Mastodon
         @todos.size
     end
 
-    # Get an individual todo. The id and line number are the same.
+    # Get an individual todo. The id and line number are the same. 0 index, not
+    # 1, as files are numbered. So line 3 is id 2. XXX: Change?
     def [](id)
         @todos[id]
     end
 
-    # Find all todo's that have the context @+context+
+    # Find all todos that have the context @+context+
     def find_context(context)
         @todos.select { |todo| todo.contexts.include? context }
     end
 
-    # Find all todo's that have the project ++project+
+    # Find all todos that have the project ++project+
     def find_project(project)
         @todos.select { |todo| todo.projects.include? project }
     end
