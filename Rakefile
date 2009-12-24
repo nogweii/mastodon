@@ -13,6 +13,7 @@ end
   gemspec.homepage = "http://github.com/evaryont/mastodon/"
   gemspec.authors = ["Colin Shea"]
 end
+Jeweler::GemcutterTasks.new
 @jeweler = @jtasks.jeweler
 
 namespace :version do
