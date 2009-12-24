@@ -48,10 +48,7 @@ CLASS
     end
 end
 
-require 'rake/testtask'
-Rake::TestTask.new do |t|
-  t.libs = ["lib"]
-  t.libs << "test"
-  t.pattern = 'test/test_*.rb'
-  t.verbose = true
+desc "Run the nanotest suite"
+task :test do
+    system("ruby -I'lib:test' test/run_tests.rb")
 end
