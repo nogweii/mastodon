@@ -30,7 +30,7 @@ class #{@jeweler.gemspec_helper.spec.name.capitalize}
     VERSION = [#{@jeweler.major_version}, #{@jeweler.minor_version}, #{@jeweler.patch_version}]
 end
 CLASS
-        system("git commit --file='.git/COMMIT_EDITMSG' --amend -q -o 'lib/#{@jeweler.gemspec_helper.spec.name}/version.rb'")
+        commit_amend("lib/#{@jeweler.gemspec_helper.spec.name}/version.rb")
     end
 
     # Take advantage of Rake not overwriting tasks.
@@ -39,12 +39,18 @@ CLASS
     namespace :bump do
         task :major do
             Rake::Task["version:ruby"].execute
+            Rake::Task["gemspec"].execute
+            commit_amend("#{@jeweler.gemspec_helper.spec.name}.gemspec")
         end
         task :minor do
             Rake::Task["version:ruby"].execute
+            Rake::Task["gemspec"].execute
+            commit_amend("#{@jeweler.gemspec_helper.spec.name}.gemspec")
         end
         task :patch do
             Rake::Task["version:ruby"].execute
+            Rake::Task["gemspec"].execute
+            commit_amend("#{@jeweler.gemspec_helper.spec.name}.gemspec")
         end
     end
 end
@@ -52,4 +58,9 @@ end
 desc "Run the nanotest suite"
 task :test do
     system("ruby -I'lib:test' test/run_tests.rb")
+end
+
+# Commit the files passed in, but use the previous commit (amend it).
+def commit_amend(*files)
+    system("git commit --file='.git/COMMIT_EDITMSG' --amend -q -o #{files.map {|path| "\"#{path}\"" }.join(' ')}")
 end
