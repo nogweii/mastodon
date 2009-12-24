@@ -27,3 +27,11 @@ assert { @mast[0].is_a? Mastodon::Todo }
 # Test if matching at the beginning of a line works
 assert { @mast[13].contexts = ["con"] }
 assert { @mast[14].projects = ["proj"] }
+
+# Test priority detection
+assert { @mast[4].priority = nil }
+assert { @mast[5].priority = nil }
+assert { @mast[6].priority = "A" }
+assert { @mast[7].priority = "Z" }
+assert { @mast[8].priority = "Q" }
+assert { @mast[9].priority = nil }
