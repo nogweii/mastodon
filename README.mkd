@@ -1,0 +1,22 @@
+# Mastodon
+
+A [todo.txt][1] parser.
+
+[1]: http://ginatrapani.github.com/todo.txt-cli/
+
+## Installation
+
+    sudo gem install mastodon
+
+## Usage
+
+    require 'mastodon'
+    mast = Mastodon.new(File.readlines("todo.txt"))
+    # List all the projects
+    mast.projects
+    # List all the contexts
+    mast.contexts
+
+## Copyright
+Mastodon is released under the MIT license. Copyright (C) Colin Shea 2009. For
+more information, consult LICENSE.txt for more information.
