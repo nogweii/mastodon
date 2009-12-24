@@ -10,7 +10,7 @@ class Mastodon
     # A project is: An plus sign (+) followed by one or more non-whitespace characters.
     Project_Regex  = /(?<!@)\B\+(\S+)/
     # A priority is: A capital letter (A-Z) surrounded by parentheses, at the beginning of the line.
-    Priority_Regex = /^\(([A-Z])\)\s/
+    Priority_Regex = /^\(([A-Z])\)/
 
     attr_reader :contexts, :projects, :todos
 
@@ -31,6 +31,7 @@ class Mastodon
 
             current_contexts = []
             current_projects = []
+            current_priority, priority = nil, nil
 
             until ((context = todo[Context_Regex]).nil?)
                 index = todo.index(context)
@@ -48,12 +49,13 @@ class Mastodon
 
             priority = todo[Priority_Regex]
             unless priority.nil?
-                todo[0..4] = "" # We know 0..4 as the priority begins the line (0) is always 1 character long (1) surrounded by parentheses (+2) and is followed by a space (+1).
-                priority = priority.match(Priority_Regex)[1]
+                index = todo.index(priority)
+                todo[index..(index+priority.length)] = ""
+                current_priority = priority.match(Priority_Regex)[1]
             end
 
             todo.strip!
-            @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, priority)
+            @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, current_priority)
         end
     end
 
