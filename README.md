@@ -1,7 +1,7 @@
 # Mastodon
-A [todo.txt][1] parser.
+A [todo.txt][ttxt] parser.
 
-[1]: http://ginatrapani.github.com/todo.txt-cli/
+[ttxt]: http://ginatrapani.github.com/todo.txt-cli/
 
 ## Installation
 
@@ -20,11 +20,14 @@ A [todo.txt][1] parser.
 ## See Also
 There are other links you can take a look at. If you care to, that is.
 
- * [Run Code Run][1] (continuous integration)
- * [Caliper & metric\_fu report][2]
+ * [Run Code Run][rcr] (continuous integration)
+ * [Caliper & metric\_fu report][calip]
+ * [RDoc.info Documentation][rdoci] ([yardoc.org][yardoc])
 
-[1]: http://runcoderun.com/evaryont/mastodon
-[2]: http://getcaliper.com/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fevaryont%2Fmastodon.git
+[rcr]: http://runcoderun.com/evaryont/mastodon
+[calip]: http://getcaliper.com/caliper/project?repo=git%3A%2F%2Fgithub.com%2Fevaryont%2Fmastodon.git
+[rdoci]: http://rdoc.info/projects/evaryont/mastodon
+[yardoc]: http://yardoc.org/docs/evaryont-mastodon
 
 ## Copyright
 Mastodon is released under the MIT license. Copyright (C) Colin Shea 2009. For
