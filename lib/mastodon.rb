@@ -40,6 +40,9 @@ class Mastodon
             end
 
             current_priority = pull_regex(todo, Priority_Regex)
+            if current_priority.empty?
+                current_priority = nil
+            end
 
             todo.strip!
             @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, current_priority)
