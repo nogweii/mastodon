@@ -71,10 +71,10 @@ context "Mastodon" do
                 topic[0]
             end
 
-            should "same characters" do
+            should "be the same characters" do
                 topic.to_s.chars.to_a == @todos[0].strip.chars.to_a
             end
-            should "same length" do
+            should "be the same length" do
                 topic.to_s.length == @todos[0].strip.length
             end
 
