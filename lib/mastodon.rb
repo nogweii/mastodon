@@ -1,7 +1,6 @@
 require 'set'
 
 require 'mastodon/todo'
-require 'mastodon/version'
 
 class Mastodon
     # A context is: An at-sign (@) followed by one or more non-whitespace characters.
