@@ -1,5 +1,4 @@
 require 'set'
-require 'pp'
 
 require 'mastodon/todo'
 require 'mastodon/version'
@@ -31,28 +30,17 @@ class Mastodon
 
             current_contexts = []
             current_projects = []
-            current_priority, priority = nil, nil
+            current_priority = nil
 
-            until ((context = todo[Context_Regex]).nil?)
-                index = todo.index(context)
-                todo[index..(index+context.length)] = ""
-                current_contexts << context.match(Context_Regex)[1]
-                contexts << context.match(Context_Regex)[1]
+            if current_contexts = pull_regex(todo, Context_Regex)
+                @contexts.merge(current_contexts)
             end
 
-            until ((project = todo[Project_Regex]).nil?)
-                index = todo.index(project)
-                todo[index..(index+project.length)] = ""
-                current_projects << project.match(Project_Regex)[1]
-                projects << project.match(Project_Regex)[1]
+            if current_projects = pull_regex(todo, Project_Regex)
+                @projects.merge(current_projects)
             end
 
-            priority = todo[Priority_Regex]
-            unless priority.nil?
-                index = todo.index(priority)
-                todo[index..(index+priority.length)] = ""
-                current_priority = priority.match(Priority_Regex)[1]
-            end
+            current_priority = pull_regex(todo, Priority_Regex)
 
             todo.strip!
             @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, current_priority)
@@ -79,4 +67,19 @@ class Mastodon
     def find_project(project)
         @todos.select { |todo| todo.projects.include? project }
     end
+
+    # Given 'string', find all matches of regular expression (removed from
+    # +string+) and return them as an array of strings.
+    def pull_regex(string, regexp)
+        found_values = []
+
+        until ((value = string[regexp]).nil?)
+            index = string.index(value)
+            string[ index .. (index + value.length) ] = ""
+            found_values << value.match(regexp)[1]
+        end
+
+        return found_values
+    end
+    private :pull_regex
 end
