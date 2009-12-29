@@ -1,3 +1,6 @@
+desc "Default task: Test & validate gemspec"
+task :default => [:test, "gemspec:validate"]
+
 begin
   require 'jeweler'
 rescue LoadError
@@ -12,6 +15,7 @@ end
   gemspec.email = "colin@evaryont.me"
   gemspec.homepage = "http://github.com/evaryont/mastodon/"
   gemspec.authors = ["Colin Shea"]
+  gemspec.files << "README.txt"
 end
 Jeweler::GemcutterTasks.new
 @jeweler = @jtasks.jeweler
