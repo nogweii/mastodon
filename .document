@@ -1,5 +1,5 @@
-README.mkd
+README.md
 lib/**/*.rb
 bin/*
 features/**/*.feature
-LICENSE
+LICENSE.md
