@@ -35,42 +35,42 @@ context "Mastodon" do
     end
 
     asserts "same characters and the same length" do
-        (@mast[0].to_s.chars.to_a == SAMPLE_TODOS[0].strip.chars.to_a) and (@mast[0].to_s.length == SAMPLE_TODOS[0].strip.length)
+        (topic[0].to_s.chars.to_a == @todos[0].strip.chars.to_a) and (topic[0].to_s.length == @todos[0].strip.length)
     end
     asserts "There should be the same amount of todos" do
-        @mast.size == SAMPLE_TODOS.size
+        topic.size == @todos.size
     end
     asserts "project should be returned as a Set" do
-        @mast.projects.is_a? Set
+        topic.projects.is_a? Set
     end
     asserts "context should be returned as a Set" do
-        @mast.contexts.is_a? Set
+        topic.contexts.is_a? Set
     end
     asserts "Confirm that the retrieved todos are of type Mastodon::Todo" do
-        @mast[0].is_a? Mastodon::Todo
+        topic[0].is_a? Mastodon::Todo
     end
     asserts "13th todo should have the context 'con'" do
-        @mast[13].contexts = ["con"]
+        topic[13].contexts = ["con"]
     end
     asserts "14th todo should have the project 'proj'" do
-        @mast[14].projects = ["proj"]
+        topic[14].projects = ["proj"]
     end
     asserts "Third todo should have no priority" do
-        @mast[3].priority.nil?
+        topic[3].priority.nil?
     end
     asserts "Fourth todo should have no priority" do
-        @mast[4].priority.nil?
+        topic[4].priority.nil?
     end
     asserts "Fifth todo should have priority A" do
-        @mast[5].priority = "A"
+        topic[5].priority = "A"
     end
     asserts "Sixth todo should have priority Z" do
-        @mast[6].priority = "Z"
+        topic[6].priority = "Z"
     end
     asserts "Seventh todo should have priority Q" do
-        @mast[7].priority = "Q"
+        topic[7].priority = "Q"
     end
     asserts "Eighth todo should have no priority" do
-        @mast[8].priority.nil?
+        topic[8].priority.nil?
     end
 end
