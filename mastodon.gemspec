@@ -5,38 +5,40 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mastodon}
-  s.version = "0.1.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin Shea"]
-  s.date = %q{2009-12-23}
-  s.description = %q{Mastodon: A ruby parser for todo.txt files.
-
-And the mastodon, like plain text, isn't extinct! (Yet.)}
+  s.date = %q{2009-12-29}
+  s.description = %q{A Ruby parser for todo.txt files}
   s.email = %q{colin@evaryont.me}
   s.extra_rdoc_files = [
-    "README.mkd"
+    "LICENSE.md",
+     "README.md"
   ]
   s.files = [
-    "Rakefile",
+    ".document",
+     ".gitignore",
+     "LICENSE.md",
+     "README.md",
+     "Rakefile",
      "VERSION.yml",
+     "lib/core_ext/string/pull_regex.rb",
      "lib/mastodon.rb",
      "lib/mastodon/todo.rb",
-     "lib/mastodon/version.rb",
-     "test/run_tests.rb",
-     "test/test_helper.rb",
-     "test/test_mastodon.rb",
+     "mastodon.gemspec",
+     "test/mastodon_test.rb",
+     "test/teststrap.rb",
      "test/todo.txt"
   ]
-  s.homepage = %q{http://github.com/evaryont/mastodon/}
+  s.homepage = %q{http://evaryont.me}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
-  s.summary = %q{A ruby parser for todo.txt files}
+  s.summary = %q{A Ruby parser for todo.txt files}
   s.test_files = [
-    "test/run_tests.rb",
-     "test/test_helper.rb",
-     "test/test_mastodon.rb"
+    "test/mastodon_test.rb",
+     "test/teststrap.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -44,9 +46,15 @@ And the mastodon, like plain text, isn't extinct! (Yet.)}
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<riot>, [">= 0"])
+      s.add_development_dependency(%q<yard>, [">= 0"])
     else
+      s.add_dependency(%q<riot>, [">= 0"])
+      s.add_dependency(%q<yard>, [">= 0"])
     end
   else
+    s.add_dependency(%q<riot>, [">= 0"])
+    s.add_dependency(%q<yard>, [">= 0"])
   end
 end
 

@@ -6,7 +6,7 @@ task :default => :test
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "mastodon2"
+    gem.name = "mastodon"
     gem.summary = %Q{A Ruby parser for todo.txt files}
     gem.description = %Q{A Ruby parser for todo.txt files}
     gem.email = "colin@evaryont.me"
