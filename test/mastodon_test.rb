@@ -11,13 +11,9 @@ context "Mastodon" do
             topic.projects
         end
 
-        should "find all projects" do
-            topic.to_a == ["proj", "proj2", "proj+phone", "proj/foo", "p_r_o_j", "p-r-o-j", "+proj", "@proj"]
-        end
+        asserts_topic.equals  ["proj", "proj2", "proj+phone", "proj/foo", "p_r_o_j", "p-r-o-j", "+proj", "@proj"]
 
-        asserts "project should be returned as a Set" do
-            topic.is_a? Set
-        end
+        asserts_topic.kind_of? Array
     end
 
     context "Contexts" do
@@ -25,13 +21,9 @@ context "Mastodon" do
             topic.contexts
         end
 
-        should "find all contexts" do
-            topic.to_a == ["con", "con2", "con@phone", "con/foo", "c_o_n", "c-o-n", "@con", "+con"]
-        end
+        asserts_topic.equals ["con", "con2", "con@phone", "con/foo", "c_o_n", "c-o-n", "@con", "+con"]
 
-        asserts "context should be returned as a Set" do
-            topic.is_a? Set
-        end
+        asserts_topic.kind_of? Array
     end
 
     asserts "Non-existent contexts should return an empty array" do
@@ -66,25 +58,54 @@ context "Mastodon" do
     end
 
     context "Todo" do
-        context "Lossless parsing" do
+#asserts(:size).equals @todos.size
+
+        asserts "all todos are of type Mastodon::Todo" do
+            !(topic.todos.map do |todo|
+                todo.is_a? Mastodon::Todo
+            end.index(false))
+        end
+
+        context "Lossless parsing: 1st Todo: Normal example" do
             setup do
+                @todo = @todos[0].strip
                 topic[0]
             end
 
             should "be the same characters" do
-                topic.to_s.chars.to_a == @todos[0].strip.chars.to_a
+                topic.to_s.chars.to_a == @todo.chars.to_a
             end
             should "be the same length" do
-                topic.to_s.length == @todos[0].strip.length
-            end
-
-            asserts "todos are of type Mastodon::Todo" do
-                topic.is_a? Mastodon::Todo
+                topic.to_s.length == @todo.length
             end
         end
 
-        should "be the same amount of todos" do
-            topic.size == @todos.size
+        context "Lossless parsing: 8th Todo: Normal example, with priority" do
+            setup do
+                @todo = @todos[7].strip
+                topic[7]
+            end
+
+            should "be the same characters" do
+                topic.to_s.chars.to_a == @todo.chars.to_a
+            end
+            should "be the same length" do
+                topic.to_s.length == @todo.length
+            end
+        end
+
+        context "Lossless parsing: 17th Todo: Example without any metadata" do
+            setup do
+                @todo = @todos[16].strip
+                topic[16]
+            end
+
+            should "be the same characters" do
+                topic.to_s.chars.to_a == @todo.chars.to_a
+            end
+            should "be the same length" do
+                topic.to_s.length == @todo.length
+            end
         end
     end
 
@@ -96,22 +117,22 @@ context "Mastodon" do
     end
 
     context "Priority" do
-        asserts "Third todo should have no priority" do
+        asserts "3rd todo should have no priority" do
             topic[3].priority.nil?
         end
-        asserts "Fourth todo should have no priority" do
+        asserts "4th todo should have no priority" do
             topic[4].priority.nil?
         end
-        asserts "Fifth todo should have priority A" do
+        asserts "5th todo should have priority A" do
             topic[5].priority = "A"
         end
-        asserts "Sixth todo should have priority Z" do
+        asserts "6th todo should have priority Z" do
             topic[6].priority = "Z"
         end
-        asserts "Seventh todo should have priority Q" do
+        asserts "7th todo should have priority Q" do
             topic[7].priority = "Q"
         end
-        asserts "Eighth todo should have no priority" do
+        asserts "8th todo should have no priority" do
             topic[8].priority.nil?
         end
     end
