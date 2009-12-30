@@ -44,6 +44,9 @@ class Mastodon
             todo.strip!
             @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, current_priority.first)
         end
+
+        @contexts = @contexts.to_a
+        @projects = @projects.to_a
     end
 
     # How many todos there are.
