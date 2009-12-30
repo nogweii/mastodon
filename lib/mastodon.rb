@@ -1,5 +1,7 @@
 require 'set'
 
+require 'core_ext/string/pull_regex'
+
 require 'mastodon/todo'
 
 class Mastodon
@@ -34,15 +36,17 @@ class Mastodon
             current_projects = []
             current_priority = nil
 
-            if current_contexts = pull_regex(todo, Context_Regex)
+            current_contexts = todo.pull_regex(Context_Regex)
+            unless current_contexts.empty?
                 @contexts.merge(current_contexts)
             end
 
-            if current_projects = pull_regex(todo, Project_Regex)
+            current_projects = todo.pull_regex(Project_Regex)
+            unless current_projects.empty?
                 @projects.merge(current_projects)
             end
 
-            current_priority = pull_regex(todo, Priority_Regex)
+            current_priority = todo.pull_regex(Priority_Regex)
 
             todo.strip!
             @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, current_priority.first)
@@ -69,19 +73,4 @@ class Mastodon
     def find_project(project)
         @todos.select { |todo| todo.projects.include? project }
     end
-
-    # Given 'string', find all matches of regular expression (removed from
-    # +string+) and return them as an array of strings.
-    def pull_regex(string, regexp)
-        found_values = []
-
-        until ((value = string[regexp]).nil?)
-            index = string.index(value)
-            string[ index .. (index + value.length) ] = ""
-            found_values << value.match(regexp)[1]
-        end
-
-        return found_values
-    end
-    private :pull_regex
 end
