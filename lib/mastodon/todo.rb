@@ -4,7 +4,10 @@ class Mastodon
 
         def to_s
             pri = priority ? "(#{priority})" : ""
-            "#{pri} #{text} @#{contexts.join(' @')} +#{projects.join(' +')}".strip
+            ctx = contexts.empty? ? "" : "@#{contexts.join(' @')}"
+            prj = projects.empty? ? "" : "+#{projects.join(' +')}"
+
+            "#{pri} #{text} #{ctx} #{prj}".strip
         end
 
         def inspect
