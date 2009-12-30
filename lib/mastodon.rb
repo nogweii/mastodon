@@ -14,14 +14,17 @@ class Mastodon
 
     # +todo+: An array of strings (each being an individual todo item)
     def initialize(todos)
-        parse! todos.map{|line| line.strip}
-    end
-
-    def parse!(todos)
         @contexts = Set.new
         @projects = Set.new
         @todos = []
 
+        parse! todos.map{|line| line.strip}
+
+        @contexts = @contexts.to_a
+        @projects = @projects.to_a
+    end
+
+    def parse!(todos)
         todos.each do |todo|
             # Looping through the string, find the metadata (context, project,
             # priority). Store it in a temporary variable, then clear it from
@@ -44,9 +47,6 @@ class Mastodon
             todo.strip!
             @todos << Mastodon::Todo.new(todo, current_contexts, current_projects, current_priority.first)
         end
-
-        @contexts = @contexts.to_a
-        @projects = @projects.to_a
     end
 
     # How many todos there are.
